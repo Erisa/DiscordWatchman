@@ -1,0 +1,4 @@
+config.json
+data/*
+*.db
+.vs/*

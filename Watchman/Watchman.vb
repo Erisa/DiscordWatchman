@@ -12,8 +12,6 @@ Public Class Watchman
     Private Const CONFIG_FILE As String = "config.json"
 
     Public Shared Async Function StartAsync() As Task
-        ' If Not File.Exists(CONFIG_FILE) Then Throw New FileNotFoundException("No config file found")
-
         Await New Watchman().RunAsync()
     End Function
 
@@ -33,8 +31,6 @@ Public Class Watchman
         With collection
             .AddSingleton(New CommandService(New CommandServiceConfig() With {.LogLevel = LogSeverity.Verbose}))
             .AddSingleton(New DiscordSocketClient(New DiscordSocketConfig() With {.LogLevel = LogSeverity.Verbose, .ExclusiveBulkDelete = True}))
-            '.AddSingleton(New ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory).AddJsonStream(cfgStream).Build)
-            '.AddSingleton(New ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory).AddJsonFile(CONFIG_FILE, False, True).Build)
         End With
 
         If Not File.Exists(CONFIG_FILE) Then

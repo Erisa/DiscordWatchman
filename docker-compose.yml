@@ -1,0 +1,12 @@
+version: '2.3'
+services:
+  bot:
+    image: ghcr.io/erisa/watchman
+    restart: always
+    volumes:
+      - type: bind
+        source: ./data/Watchman.db
+        target: /app/Watchman.db
+      - type: bind
+       source: ./config.json
+       target: /app/config.json
