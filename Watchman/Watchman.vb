@@ -1,5 +1,6 @@
 ﻿Imports System.IO
 Imports System.Reflection
+Imports System.Text
 Imports System.Threading
 Imports Discord
 Imports Discord.Commands
@@ -11,7 +12,7 @@ Public Class Watchman
     Private Const CONFIG_FILE As String = "config.json"
 
     Public Shared Async Function StartAsync() As Task
-        If Not File.Exists(CONFIG_FILE) Then Throw New FileNotFoundException("No config file found")
+        ' If Not File.Exists(CONFIG_FILE) Then Throw New FileNotFoundException("No config file found")
 
         Await New Watchman().RunAsync()
     End Function
@@ -32,8 +33,16 @@ Public Class Watchman
         With collection
             .AddSingleton(New CommandService(New CommandServiceConfig() With {.LogLevel = LogSeverity.Verbose}))
             .AddSingleton(New DiscordSocketClient(New DiscordSocketConfig() With {.LogLevel = LogSeverity.Verbose, .ExclusiveBulkDelete = True}))
-            .AddSingleton(New ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory).AddJsonFile(CONFIG_FILE, False, True).Build)
+            '.AddSingleton(New ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory).AddJsonStream(cfgStream).Build)
+            '.AddSingleton(New ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory).AddJsonFile(CONFIG_FILE, False, True).Build)
         End With
+
+        If Not File.Exists(CONFIG_FILE) Then
+            Dim cfgStream = New MemoryStream(Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("WATCHMAN_CONFIG")))
+            collection.AddSingleton(New ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory).AddJsonStream(cfgStream).Build)
+        Else
+            collection.AddSingleton(New ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory).AddJsonFile(CONFIG_FILE, False, True).Build)
+        End If
 
         Return Assembly.GetEntryAssembly().LoadCustomServices(collection).BuildServiceProvider
     End Function

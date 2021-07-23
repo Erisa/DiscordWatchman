@@ -3,17 +3,17 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <RootNamespace>Watchman</RootNamespace>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Dapper" Version="2.0.4" />
+    <PackageReference Include="Dapper" Version="2.0.90" />
     <PackageReference Include="Dapper.FastCrud" Version="2.5.0.39" />
-    <PackageReference Include="Discord.Net" Version="2.2.0-dev-20191025.3" />
-    <PackageReference Include="Humanizer.Core" Version="2.7.2" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.2.0" />
-    <PackageReference Include="System.Data.SQLite.Core" Version="1.0.112" />
+    <PackageReference Include="Discord.Net" Version="2.4.0" />
+    <PackageReference Include="Humanizer.Core" Version="2.11.10" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0-preview.6.21352.12" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0-preview.6.21352.12" />
+    <PackageReference Include="System.Data.SQLite.Core" Version="1.0.114.3" />
   </ItemGroup>
 
 </Project>
