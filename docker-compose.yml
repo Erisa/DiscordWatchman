@@ -5,8 +5,8 @@ services:
     restart: always
     volumes:
       - type: bind
-        source: ./data/Watchman.db
-        target: /app/Watchman.db
+        source: ./data/Database.db
+        target: /app/Database.db
       - type: bind
-       source: ./config.json
-       target: /app/config.json
+        source: ./config.json
+        target: /app/config.json
