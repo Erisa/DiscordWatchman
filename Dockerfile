@@ -1,5 +1,5 @@
 ﻿FROM --platform=${BUILDPLATFORM} \
-    mcr.microsoft.com/dotnet/sdk:6.0.201 AS build-env
+    mcr.microsoft.com/dotnet/sdk:6.0.202 AS build-env
 WORKDIR /app
 
 # We need Git for Cliptok builds now.
@@ -14,7 +14,7 @@ COPY Watchman ./
 RUN dotnet build -c Release -o out
 
 # Build runtime image
-FROM mcr.microsoft.com/dotnet/runtime:6.0.3-alpine3.14
+FROM mcr.microsoft.com/dotnet/runtime:6.0.4-alpine3.14
 WORKDIR /app
 VOLUME /app/database.db
 COPY --from=build-env /app/out .
