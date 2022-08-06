@@ -1,4 +1,4 @@
-﻿Imports System.IO
+Imports System.IO
 Imports System.Reflection
 Imports System.Text
 Imports System.Threading
@@ -9,7 +9,7 @@ Imports Microsoft.Extensions.Configuration
 Imports Microsoft.Extensions.DependencyInjection
 
 Public Class Watchman
-    Private Const CONFIG_FILE As String = "config.json"
+    Private CONFIG_FILE As String = "config.json"
 
     Public Shared Async Function StartAsync() As Task
         Await New Watchman().RunAsync()
@@ -32,6 +32,10 @@ Public Class Watchman
             .AddSingleton(New CommandService(New CommandServiceConfig() With {.LogLevel = LogSeverity.Verbose}))
             .AddSingleton(New DiscordSocketClient(New DiscordSocketConfig() With {.LogLevel = LogSeverity.Verbose, .ExclusiveBulkDelete = True}))
         End With
+
+        If Environment.GetEnvironmentVariable("WATCHMAN_CONFIG_PATH") IsNot Nothing) Then
+            CONFIG_FILE = Environment.GetEnvironmentVariable("WATCHMAN_CONFIG_PATH")
+        End If
 
         If Not File.Exists(CONFIG_FILE) Then
             Dim cfgStream = New MemoryStream(Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("WATCHMAN_CONFIG")))
