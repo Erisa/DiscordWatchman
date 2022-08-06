@@ -1,0 +1,17 @@
+# fly.toml file generated for watchman on 2022-08-06T17:07:55+01:00
+
+app = "watchman"
+kill_signal = "SIGINT"
+kill_timeout = 5
+processes = []
+
+[env]
+  WATCHMAN_CONFIG_PATH = "/data/config.json"
+
+[experimental]
+  allowed_public_ports = []
+  auto_rollback = true
+
+[mounts]
+source="data"
+destination="/data"
