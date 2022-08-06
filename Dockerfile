@@ -16,6 +16,8 @@ RUN dotnet build -c Release -o out
 # Build runtime image
 FROM mcr.microsoft.com/dotnet/runtime:6.0.7-alpine3.15
 WORKDIR /app
+ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
+RUN apk add --no-cache icu-libs
 VOLUME /app/database.db
 COPY --from=build-env /app/out .
 ENTRYPOINT ["dotnet", "Watchman.dll"]
