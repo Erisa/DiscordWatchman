@@ -33,7 +33,7 @@ Public Class Watchman
             .AddSingleton(New DiscordSocketClient(New DiscordSocketConfig() With {.LogLevel = LogSeverity.Verbose, .ExclusiveBulkDelete = True}))
         End With
 
-        If Environment.GetEnvironmentVariable("WATCHMAN_CONFIG_PATH") IsNot Nothing) Then
+        If Environment.GetEnvironmentVariable("WATCHMAN_CONFIG_PATH") IsNot Nothing Then
             CONFIG_FILE = Environment.GetEnvironmentVariable("WATCHMAN_CONFIG_PATH")
         End If
 
