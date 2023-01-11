@@ -1,5 +1,5 @@
 ﻿FROM --platform=${BUILDPLATFORM} \
-    mcr.microsoft.com/dotnet/sdk:6.0.404 AS build-env
+    mcr.microsoft.com/dotnet/sdk:6.0.405 AS build-env
 WORKDIR /app
 
 # We need Git for Cliptok builds now.
@@ -14,7 +14,7 @@ COPY Watchman ./
 RUN dotnet build -c Release -o out
 
 # Build runtime image
-FROM mcr.microsoft.com/dotnet/runtime:6.0.12-alpine3.17
+FROM mcr.microsoft.com/dotnet/runtime:6.0.13-alpine3.17
 WORKDIR /app
 ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
 RUN apk add --no-cache icu-libs
